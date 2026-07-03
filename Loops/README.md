@@ -1,9 +1,24 @@
-Programs related to Python Loops 
+# Loops in Python 🐍
 
-* Finding sum of numbers
-* Numbers program
-    * Program 1: Sum of first N natural numbers
-    * Program 2: Sum of digits
-    * Program 3: Count digits
-* Find the pair with target sum
-* Finding factorial program
+This folder contains Python programs that focus on understanding and practicing looping concepts in Python.
+
+The programs demonstrate how loops can be used to perform repetitive tasks, solve logical problems, and process data efficiently.
+
+## Topics Covered
+
+* `for` loops
+* `while` loops
+* Nested loops
+* Loop control statements
+* Problem-solving using loops
+
+## Purpose
+
+* Understand the use of loops in Python
+* Improve logical thinking through repetitive tasks
+* Build a strong foundation for solving programming problems
+
+---
+
+Part of my Python learning journey 🚀
+
