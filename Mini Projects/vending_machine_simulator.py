@@ -1,5 +1,8 @@
 # Mini Project: Vending Machine Simulator
 
+purchase_history = []
+grand_total = 0
+
 while True:
 
     # Display the vending machine menu
@@ -38,7 +41,21 @@ while True:
         price = 15
 
     elif choice == "5":
-        print("Thank you for using the Vending Machine.")
+
+        print("\n========== PURCHASE SUMMARY ==========")
+
+        if purchase_history:
+
+            for purchase in purchase_history:
+                print(f"{purchase['Item']} x{purchase['Quantity']} = ₹{purchase['Total']}")
+
+            print("--------------------------------------")
+            print("Grand Total : ₹", grand_total)
+
+        else:
+            print("No items purchased.")
+
+        print("\nThank you for using the Vending Machine.")
         break
 
     else:
@@ -54,49 +71,78 @@ while True:
 
             quantity = int(quantity)
 
-            total = price * quantity
+            if quantity > 0:
+                break
 
-            # Display the bill
-            print("\n===== BILL =====")
-            print("Item :", item)
-            print("Price :", price)
-            print("Quantity :", quantity)
-            print("Total Bill : ₹", total)
-
-            # Accept payment
-            amount = input("Enter payment amount: ₹")
-            if (amount.isdigit()):
-                amount = int(amount)
-
-                if amount >= total:
-
-                    change = amount - total
-
-                    print("\nPayment Successful!")
-                    print("Total Bill : ₹", total)
-                    print("Change : ₹", change)
-
-                    # Ask whether to continue shopping
-                    while True:
-
-                        again = input("\nDo you want to buy anything else? (Y/N): ").upper()
-
-                        if again == "Y":
-                            break
-
-                        elif again == "N":
-                            print("\nThank you for using the Vending Machine.")
-                            exit()
-
-                        else:
-                            print("Please enter Y or N.")
-
-                    break
-
-                else:
-                    print("\nInsufficient payment.")
-                    print("Please pay ₹", total)
             else:
-                print("Amount should be in digit")
+                print("Quantity should be greater than zero.")
+
         else:
-            print("Quantity should contain numbers only.")   
+            print("Quantity should contain numbers only.")
+
+    total = price * quantity
+
+    # Display the bill
+    print("\n===== BILL =====")
+    print("Item :", item)
+    print("Price :", price)
+    print("Quantity :", quantity)
+    print("Total Bill : ₹", total)
+
+    # Accept payment
+    while True:
+
+        amount = input("Enter payment amount: ₹")
+
+        if amount.isdigit():
+
+            amount = int(amount)
+
+            if amount >= total:
+
+                change = amount - total
+
+                print("\nPayment Successful!")
+                print("Total Bill : ₹", total)
+                print("Change : ₹", change)
+
+                grand_total += total
+
+                purchase_history.append({
+                    "Item": item,
+                    "Quantity": quantity,
+                    "Total": total
+                })
+
+                break
+
+            else:
+                print("Insufficient payment.")
+                print(f"Please pay at least ₹{total}.")
+
+        else:
+            print("Payment amount should contain numbers only.")
+
+    # Ask whether to continue shopping
+    while True:
+
+        again = input("\nDo you want to buy anything else? (Y/N): ").upper()
+
+        if again == "Y":
+            break
+
+        elif again == "N":
+
+            print("\n========== PURCHASE SUMMARY ==========")
+
+            for purchase in purchase_history:
+                print(f"{purchase['Item']} x{purchase['Quantity']} = ₹{purchase['Total']}")
+
+            print("--------------------------------------")
+            print("Grand Total : ₹", grand_total)
+
+            print("\nThank you for using the Vending Machine.")
+            exit()
+
+        else:
+            print("Please enter Y or N.")
