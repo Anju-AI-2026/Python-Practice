@@ -2,6 +2,7 @@
 
 while True:
 
+    # Display the vending machine menu
     print("\n===== VENDING MACHINE =====")
     print("1. Chips       ₹20")
     print("2. Chocolate   ₹30")
@@ -11,6 +12,7 @@ while True:
 
     choice = input("Enter your choice: ")
 
+    # Select item and price
     if choice == "1":
         print("\nYou selected Chips")
         print("Price : ₹20")
@@ -20,7 +22,7 @@ while True:
     elif choice == "2":
         print("\nYou selected Chocolate")
         print("Price : ₹30")
-        item ="Chocolate"
+        item = "Chocolate"
         price = 30
 
     elif choice == "3":
@@ -41,33 +43,60 @@ while True:
 
     else:
         print("Invalid choice. Please try again.")
+        continue
 
-    while True :
+    # Ask for quantity
+    while True:
+
         quantity = input("Enter quantity: ")
-        if (quantity.isdigit()):
+
+        if quantity.isdigit():
+
             quantity = int(quantity)
+
             total = price * quantity
 
+            # Display the bill
             print("\n===== BILL =====")
             print("Item :", item)
             print("Price :", price)
             print("Quantity :", quantity)
-            print("\nTotal Bill : ₹", total)  
+            print("Total Bill : ₹", total)
 
-            amount = int(input("Enter payment amount: ₹"))
+            # Accept payment
+            amount = input("Enter payment amount: ₹")
+            if (amount.isdigit()):
+                amount = int(amount)
 
-            if amount >= total:
+                if amount >= total:
 
-                change = amount - total
+                    change = amount - total
 
-                print("\nPayment Successful!")
-                print("Total Bill : ₹", total)
-                print("Change : ₹", change)
-                return
+                    print("\nPayment Successful!")
+                    print("Total Bill : ₹", total)
+                    print("Change : ₹", change)
 
+                    # Ask whether to continue shopping
+                    while True:
+
+                        again = input("\nDo you want to buy anything else? (Y/N): ").upper()
+
+                        if again == "Y":
+                            break
+
+                        elif again == "N":
+                            print("\nThank you for using the Vending Machine.")
+                            exit()
+
+                        else:
+                            print("Please enter Y or N.")
+
+                    break
+
+                else:
+                    print("\nInsufficient payment.")
+                    print("Please pay ₹", total)
             else:
-
-                print("\nInsufficient payment.")
-                print("Please pay ₹", total)
+                print("Amount should be in digit")
         else:
-            print("Quantity should be numbers only")  
+            print("Quantity should contain numbers only.")   
