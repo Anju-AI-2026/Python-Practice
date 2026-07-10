@@ -42,12 +42,32 @@ while True:
     else:
         print("Invalid choice. Please try again.")
 
-    quantity = int(input("Enter quantity: "))
+    while True :
+        quantity = input("Enter quantity: ")
+        if (quantity.isdigit()):
+            quantity = int(quantity)
+            total = price * quantity
 
-    total = price * quantity
+            print("\n===== BILL =====")
+            print("Item :", item)
+            print("Price :", price)
+            print("Quantity :", quantity)
+            print("\nTotal Bill : ₹", total)  
 
-    print("\n===== BILL =====")
-    print("Item :", item)
-    print("Price :", price)
-    print("Quantity :", quantity)
-    print("Total Bill : ₹", total)   
+            amount = int(input("Enter payment amount: ₹"))
+
+            if amount >= total:
+
+                change = amount - total
+
+                print("\nPayment Successful!")
+                print("Total Bill : ₹", total)
+                print("Change : ₹", change)
+                return
+
+            else:
+
+                print("\nInsufficient payment.")
+                print("Please pay ₹", total)
+        else:
+            print("Quantity should be numbers only")  
